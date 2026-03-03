@@ -1,0 +1,24 @@
+{
+  "name": "ultra-hd-photo-to-emoji-converter",
+  "version": "1.0.0",
+  "description": "Transform images into emoji mosaic art with ultra HD export. 100% client-side, privacy-focused.",
+  "main": "index.html",
+  "scripts": {
+    "serve": "npx serve . -p 8080",
+    "dev": "npx live-server --port=8080 --open=/"
+  },
+  "keywords": [
+    "emoji",
+    "photo-converter",
+    "image-processing",
+    "mosaic",
+    "client-side",
+    "privacy-focused"
+  ],
+  "author": "PhotoToEmoji",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.2.0"
+  }
+}

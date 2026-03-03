@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Ultra HD Photo to Emoji Converter. Transform your images into stunning emoji mosaic art with up to 8K resolution export. Fully client-side, privacy-focused, no uploads required.">
+    <meta name="keywords" content="photo to emoji, emoji converter, emoji art, emoji mosaic, image to emoji, emoji generator, free emoji tool">
+    <meta name="author" content="Photo to Emoji Converter">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#1a1a2e">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://phototoemoji.com/">
+    <meta property="og:title" content="Ultra HD Photo to Emoji Converter - Free Online Tool">
+    <meta property="og:description" content="Transform your photos into beautiful emoji mosaic art. Export in ultra HD up to 8K resolution. 100% free, client-side only.">
+    <meta property="og:image" content="/assets/og-image.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ultra HD Photo to Emoji Converter">
+    <meta name="twitter:description" content="Convert images to emoji art with ultra HD export up to 8K. Free, private, no uploads.">
+    <meta name="twitter:image" content="/assets/og-image.jpg">
+
+    <title>Ultra HD Photo to Emoji Converter - Free Online Tool | Transform Images to Emoji Art</title>
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Ultra HD Photo to Emoji Converter",
+        "description": "Transform your images into stunning emoji mosaic art with ultra high-resolution export capabilities. A fully client-side tool that prioritizes privacy - your photos never leave your device.",
+        "url": "https://phototoemoji.com",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Drag & drop image upload",
+            "Multiple emoji modes (faces, full palette, optimized)",
+            "Adjustable grid density",
+            "Ultra HD export up to 8K resolution",
+            "Zoom and pan preview",
+            "Multiple export formats (PNG, SVG, TXT)"
+        ],
+        "browserRequirements": "Requires JavaScript and HTML5 Canvas support"
+    }
+    </script>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <span class="logo-emoji">🎨</span>
+                <span class="logo-text">PhotoToEmoji</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="/pages/faq.html">FAQ</a></li>
+                <li><a href="/pages/about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Ad Banner -->
+    <div class="ad-banner">
+        <div class="ad-container" data-ad-slot="top-banner">
+            <!-- AdSense placeholder -->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1 class="hero-title">Ultra HD Photo to Emoji Converter</h1>
+                <p class="hero-subtitle">Transform your images into stunning emoji mosaic art with ultra high-resolution export up to 8K. 100% free, private, and runs entirely in your browser.</p>
+                <div class="hero-badges">
+                    <span class="badge">🔒 Privacy-First</span>
+                    <span class="badge">⚡ No Uploads</span>
+                    <span class="badge">🎯 Ultra HD Export</span>
+                </div>
+            </section>
+
+            <!-- Upload Zone -->
+            <section id="upload-section" class="upload-section">
+                <div id="upload-zone" class="upload-zone">
+                    <div class="upload-icon">📷</div>
+                    <h2 class="upload-title">Drop Your Image Here</h2>
+                    <p class="upload-description">or click to browse</p>
+                    <p class="upload-formats">Supports: JPG, PNG, WebP • Max size: 50MB</p>
+                    <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden>
+                </div>
+            </section>
+
+            <!-- In-content Ad -->
+            <div class="ad-in-content">
+                <div class="ad-container" data-ad-slot="in-content">
+                    <!-- AdSense placeholder -->
+                </div>
+            </div>
+
+            <!-- Controls Panel -->
+            <section id="controls-section" class="controls-section hidden">
+                <div class="controls-panel">
+                    <h3 class="controls-title">⚙️ Settings</h3>
+                    
+                    <div class="control-group">
+                        <label for="emoji-mode" class="control-label">
+                            Emoji Mode
+                            <span class="control-hint" title="Choose which emojis to use in the mosaic">ℹ️</span>
+                        </label>
+                        <select id="emoji-mode" class="control-select">
+                            <option value="faces">Faces Only (80 emojis)</option>
+                            <option value="full" selected>Full Palette (1500+ emojis)</option>
+                            <option value="optimized">Optimized (32 colors)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="grid-size" class="control-label">
+                            Grid Density: <span id="grid-size-value">100</span> x <span id="grid-size-value-2">100</span>
+                            <span class="control-hint" title="Higher = more detail, slower processing">ℹ️</span>
+                        </label>
+                        <input type="range" id="grid-size" min="32" max="300" value="100" class="control-range">
+                        <div class="control-range-labels">
+                            <span>32</span>
+                            <span>300</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="emoji-size" class="control-label">
+                            Preview Zoom: <span id="zoom-level-value">100%</span>
+                        </label>
+                        <input type="range" id="preview-zoom" min="50" max="400" value="100" class="control-range">
+                        <div class="control-range-labels">
+                            <span>50%</span>
+                            <span>400%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="export-resolution" class="control-label">
+                            Export Resolution
+                            <span class="control-hint" title="Higher resolution = better quality, larger file">ℹ️</span>
+                        </label>
+                        <select id="export-resolution" class="control-select">
+                            <option value="2K">2K (2048px)</option>
+                            <option value="4K" selected>4K (4096px)</option>
+                            <option value="8K">8K (8192px) ⚠️ Large</option>
+                        </select>
+                    </div>
+
+                    <div class="control-actions">
+                        <button id="process-btn" class="btn btn-primary">
+                            <span class="btn-icon">🔄</span>
+                            <span class="btn-text">Convert to Emoji</span>
+                        </button>
+                        <button id="reset-btn" class="btn btn-secondary">
+                            <span class="btn-icon">🗑️</span>
+                            <span class="btn-text">New Image</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Bar -->
+            <section id="progress-section" class="progress-section hidden">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span id="progress-text">Processing...</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Canvas Viewer -->
+            <section id="canvas-section" class="canvas-section hidden">
+                <div class="canvas-container" id="canvas-container">
+                    <canvas id="main-canvas" class="main-canvas"></canvas>
+                    <div id="zoom-controls" class="zoom-controls">
+                        <button id="zoom-out" class="zoom-btn" title="Zoom Out">−</button>
+                        <span id="zoom-indicator">100%</span>
+                        <button id="zoom-in" class="zoom-btn" title="Zoom In">+</button>
+                        <button id="zoom-reset" class="zoom-btn" title="Reset Zoom">⟲</button>
+                    </div>
+                </div>
+                <p class="canvas-hint">🖱️ Scroll to zoom • Drag to pan</p>
+            </section>
+
+            <!-- Download Panel -->
+            <section id="download-section" class="download-section hidden">
+                <div class="download-panel">
+                    <h3 class="download-title">💾 Export Your Emoji Art</h3>
+                    <div class="download-buttons">
+                        <button id="download-png" class="btn btn-download">
+                            <span class="btn-icon">🖼️</span>
+                            <span class="btn-text">Download PNG</span>
+                        </button>
+                        <button id="download-svg" class="btn btn-download">
+                            <span class="btn-icon">📐</span>
+                            <span class="btn-text">Download SVG</span>
+                        </button>
+                        <button id="download-txt" class="btn btn-download">
+                            <span class="btn-icon">📝</span>
+                            <span class="btn-text">Copy Text</span>
+                        </button>
+                    </div>
+                    <p id="export-warning" class="export-warning hidden">
+                        ⚠️ Large export may use significant memory and take longer to generate.
+                    </p>
+                </div>
+            </section>
+
+            <!-- How It Works -->
+            <section id="how-it-works" class="content-section">
+                <h2>How to Convert Photos to Emoji Art</h2>
+                <div class="steps-grid">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Upload Your Image</h3>
+                        <p>Drag and drop any photo into the upload zone or click to browse. We support JPG, PNG, and WebP formats up to 50MB. Your image is processed entirely in your browser's memory.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Choose Your Settings</h3>
+                        <p>Select an emoji mode (faces only, full palette, or optimized for clarity). Adjust the grid density - higher values create more detailed mosaics but require more processing time.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Convert & Preview</h3>
+                        <p>Click "Convert to Emoji" and watch as our intelligent color-matching engine transforms your image. Use zoom and pan to explore the emoji mosaic in detail.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Export in Ultra HD</h3>
+                        <p>Download your creation in stunning resolution up to 8K (8192px). Choose PNG for universal compatibility, SVG for scalable vector format, or copy as text to paste anywhere.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section id="features" class="content-section">
+                <h2>Why Choose Our Photo to Emoji Converter?</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <div class="feature-icon">🔒</div>
+                        <h3>100% Private</h3>
+                        <p>Your photos never leave your device. All processing happens locally in your browser's memory. No servers, no uploads, no storage. Refresh the page and everything is cleared.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Lightning Fast</h3>
+                        <p>Powered by Web Workers and optimized algorithms. Even high-resolution images process quickly without freezing your browser. Progressive rendering shows results instantly.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Smart Color Matching</h3>
+                        <p>Our advanced Euclidean distance algorithm finds the perfect emoji for each pixel cluster. Choose from multiple emoji palettes optimized for different use cases.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">📐</div>
+                        <h3>Ultra HD Export</h3>
+                        <p>Export your emoji art in stunning resolution up to 8K (8192x8192 pixels). Perfect for printing, wallpapers, or professional use. Crystal clear at any size.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">📱</div>
+                        <h3>Responsive Design</h3>
+                        <p>Works perfectly on desktop, tablet, and mobile devices. Touch-friendly controls and adaptive layout ensure a smooth experience anywhere.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">💰</div>
+                        <h3>Completely Free</h3>
+                        <p>No subscriptions, no watermarks, no hidden fees. Use the tool as much as you want. Generate unlimited emoji art creations without any cost.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Use Cases -->
+            <section class="content-section">
+                <h2>Creative Ways to Use Emoji Art</h2>
+                <div class="use-cases">
+                    <div class="use-case">
+                        <h3>🖼️ Profile Pictures</h3>
+                        <p>Turn your photo into a unique emoji-based avatar that stands out on social media platforms.</p>
+                    </div>
+                    <div class="use-case">
+                        <h3>🎨 Digital Art</h3>
+                        <p>Create contemporary digital art pieces by transforming photographs into emoji mosaics.</p>
+                    </div>
+                    <div class="use-case">
+                        <h3>🎁 Custom Gifts</h3>
+                        <p>Make personalized gifts by converting family photos into emoji art prints or merchandise.</p>
+                    </div>
+                    <div class="use-case">
+                        <h3>📧 Creative Communications</h3>
+                        <p>Add emoji art to emails, presentations, or documents for a unique visual touch.</p>
+                    </div>
+                    <div class="use-case">
+                        <h3>🎮 Game Assets</h3>
+                        <p>Generate emoji textures or backgrounds for games and creative projects.</p>
+                    </div>
+                    <div class="use-case">
+                        <h3>🖨️ Wall Art</h3>
+                        <p>Export in 8K resolution and print large-format emoji art for home or office decoration.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technical Details -->
+            <section class="content-section">
+                <h2>Technical Specifications</h2>
+                <div class="specs">
+                    <div class="spec-item">
+                        <h3>Processing Engine</h3>
+                        <p>HTML5 Canvas API with Web Worker parallelization for multi-core performance. OffscreenCanvas support for smooth rendering.</p>
+                    </div>
+                    <div class="spec-item">
+                        <h3>Color Matching</h3>
+                        <p>Euclidean distance algorithm in RGB color space. Pre-computed emoji color database for instant lookups. Optimized palette selection for accurate color representation.</p>
+                    </div>
+                    <div class="spec-item">
+                        <h3>Emoji Database</h3>
+                        <p>1,500+ emojis with pre-calculated average RGB values. Categorized into faces-only, full palette, and optimized 32-color sets. Unicode 15.0 compliant.</p>
+                    </div>
+                    <div class="spec-item">
+                        <h3>Export Formats</h3>
+                        <p>PNG (lossless compression, up to 8K), SVG (scalable vector with emoji text), TXT (plain text emoji matrix). Optional clipboard integration for quick sharing.</p>
+                    </div>
+                    <div class="spec-item">
+                        <h3>Browser Support</h3>
+                        <p>Chrome 80+, Firefox 75+, Safari 14+, Edge 80+. Progressive enhancement ensures graceful degradation on older browsers. No external dependencies.</p>
+                    </div>
+                    <div class="spec-item">
+                        <h3>Memory Management</h3>
+                        <p>Automatic memory pressure detection. Intelligent chunking for large grids. Explicit cleanup on page unload. Safe limits for mobile devices.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Mobile Sticky Ad -->
+    <div class="ad-mobile-sticky">
+        <div class="ad-container" data-ad-slot="mobile-sticky">
+            <!-- AdSense placeholder -->
+        </div>
+        <button id="close-mobile-ad" class="ad-close">✕</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>PhotoToEmoji</h4>
+                    <p>The free, private way to transform your photos into emoji art. No uploads, no storage, just creativity.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="/pages/faq.html">FAQ</a></li>
+                        <li><a href="/pages/about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="/pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/pages/disclaimer.html">Terms of Use</a></li>
+                        <li><a href="/pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Share</h4>
+                    <div class="social-links">
+                        <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20amazing%20Photo%20to%20Emoji%20converter!&url=https://phototoemoji.com" target="_blank" rel="noopener">𝕏</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://phototoemoji.com" target="_blank" rel="noopener">f</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://phototoemoji.com" target="_blank" rel="noopener">in</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PhotoToEmoji. All rights reserved. Made with ❤️ for emoji lovers everywhere.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="/js/main.js"></script>
+</body>
+</html>
