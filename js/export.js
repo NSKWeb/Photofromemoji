@@ -9,6 +9,9 @@ let exportState = {
     isExporting: false
 };
 
+// Store app reference for use in export functions
+let appInstance = null;
+
 /**
  * Initialize export controls
  * @param {Object} state - App state
